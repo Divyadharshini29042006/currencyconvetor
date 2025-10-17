@@ -15,30 +15,3 @@ The React Compiler is not enabled on this template because of its impact on dev 
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 
-# Use official Node image
-FROM node:18-alpine
-
-# Set working directory
-WORKDIR /app
-
-# Install dependencies
-COPY package*.json ./
-RUN npm install
-
-# Copy app files
-COPY . .
-
-# Build the app
-RUN npm run build
-
-# Use Nginx to serve static files
-FROM nginx:stable-alpine
-COPY --from=0 /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-node_modules
-build
-.dockerignore
-Dockerfile
-.git
-.gitignore
